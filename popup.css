@@ -1,0 +1,172 @@
+/* popup.css — No Meta AI (web) popup styles (atop nma-base.css).
+   Premium, calm, 8px-grid. Width 360px (popup viewport). */
+
+.nma-popup {
+  width: 360px;
+  max-height: 600px;
+  overflow-y: auto;
+  background: var(--nma-surface);
+}
+
+.nma-popup__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nma-space-3);
+  padding: var(--nma-space-4);
+}
+
+/* ---- Hero card (master switch) ---- */
+.nma-popup__hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nma-space-3);
+  padding: var(--nma-space-5);
+}
+
+.nma-popup__hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0; /* allow wrapping within flex parent */
+}
+
+.nma-popup__hero-title {
+  font-size: var(--nma-fs-heading);
+  font-weight: var(--nma-fw-bold);
+  letter-spacing: -0.01em;
+  color: var(--nma-text);
+}
+
+.nma-popup__hero-sub {
+  font-size: var(--nma-fs-caption);
+  color: var(--nma-text-muted);
+}
+
+/* ---- Surfaces list ---- */
+.nma-popup__surfaces {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nma-space-2);
+}
+
+.nma-popup__surface-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nma-space-2);
+}
+
+/* ---- Surface card (flush) ---- */
+.nma-popup__surface {
+  padding: var(--nma-space-3);
+}
+
+.nma-popup__surface-top {
+  display: flex;
+  align-items: center;
+  gap: var(--nma-space-3);
+}
+
+.nma-popup__surface-expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--nma-text-muted);
+  border-radius: var(--nma-radius-sm);
+  flex-shrink: 0;
+}
+.nma-popup__surface-expand:hover {
+  background: var(--nma-accent-soft);
+  color: var(--nma-accent);
+}
+
+.nma-popup__surface-name {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--nma-fs-body);
+  font-weight: var(--nma-fw-semibold);
+  color: var(--nma-text);
+}
+
+/* Collapsible sub-toggle list */
+.nma-popup__surface-subs {
+  display: none;
+  flex-direction: column;
+  gap: var(--nma-space-1);
+  margin-top: var(--nma-space-2);
+  padding-top: var(--nma-space-2);
+  border-top: 1px solid var(--nma-border);
+}
+.nma-popup__surface--expanded .nma-popup__surface-subs {
+  display: flex;
+}
+
+/* Sub-toggle row */
+.nma-popup__sub-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nma-space-3);
+  min-height: 32px;
+  padding: var(--nma-space-1) var(--nma-space-2);
+  border-radius: var(--nma-radius-sm);
+}
+
+.nma-popup__sub-row:hover {
+  background: var(--nma-surface-2);
+}
+
+.nma-popup__sub-label {
+  font-size: var(--nma-fs-caption);
+  color: var(--nma-text-muted);
+}
+
+/* ---- Shortcuts ("All on" / "All off") ---- */
+.nma-popup__shortcuts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nma-space-2);
+  padding: var(--nma-space-2) 0;
+}
+
+.nma-popup__shortcut-divider {
+  color: var(--nma-text-muted);
+  font-size: var(--nma-fs-caption);
+}
+
+/* ---- First-open toast ----
+   One-shot confirmation that the hide is active on all four
+   surfaces. Appears after install, dismissed by a click or after
+   6 seconds. Never re-shown (gated by storage.local). */
+.nma-popup__toast {
+  margin: 0;
+  padding: var(--nma-space-2) var(--nma-space-3);
+  background: var(--nma-accent-soft);
+  color: var(--nma-accent);
+  font-size: var(--nma-fs-caption);
+  font-weight: var(--nma-fw-semibold);
+  border-radius: var(--nma-radius-sm);
+  text-align: center;
+  cursor: pointer;
+  animation: nma-toast-in 220ms ease-out;
+}
+
+.nma-popup__toast[hidden] {
+  display: none;
+}
+
+@keyframes nma-toast-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nma-popup__toast { animation: none; }
+}
+

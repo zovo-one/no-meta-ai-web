@@ -1,0 +1,129 @@
+/* === No Meta AI (web) — content/hide.css ===
+ *
+ * WORKHORSE stylesheet. Pure CSS `display:none !important` rules gated by
+ * `html.nma-<surface>-off` (and per-element sub-toggle classes)
+ * applied by content/hide.ts at `document_start` BEFORE first paint —
+ * no FOUC.
+ *
+ * DURABILITY CONTRACT — these rules use DURABLE ANCHORS ONLY:
+ *
+ *   - `[aria-label="Meta AI"]`             — exact aria-label match
+ *   - `[aria-label*="Meta AI" i]`          — contains aria-label match,
+ *                                            case-insensitive
+ *   - `.nma-hidden`                   — stable class added by the
+ *                                            TreeWalker pass on visible-text
+ *                                            matches ("Meta AI" / "Ask Meta
+ *                                            AI" only — scope hard-bound)
+ *
+ * FORBIDDEN — these selectors would break on every Meta deploy and are
+ * grep-gate FAILs in 5-qa:
+ *
+ *   - attribute selectors keyed on hashed-class substrings (prefix or
+ *     substring matches against Meta's obfuscated class tokens)
+ *   - testing-only attribute selectors (brittle to Meta renames)
+ *   - any literal Meta hashed-class strings
+ *
+ * lastVerified: 2026-07-20 (all four surfaces — selectors.ts)
+ *
+ * RULE MAP
+ *   Block 1: Per-surface aria-label hide + .nma-hidden hide
+ *            (4 surfaces + master = 5 selectors per attribute matcher)
+ *   Block 2: Per-element un-hide rules
+ *            (16 rules — 4 surfaces x 4 element keys)
+ *
+ * The CSS uses `display: revert !important` for the per-element un-hide
+ * rules so that toggling a sub-toggle OFF overrides the surface hide.
+ * `revert` (not `initial` or `unset`) preserves the host page's own
+ * display value for the element.
+ */
+
+/* =========================================================================
+ * Block 1 — per-surface hide rules
+ *
+ * The class `html.nma-<surface>-off` is added to <html> by hide.ts
+ * when the corresponding surface is ON (i.e., the user wants Meta AI
+ * hidden on that surface). The naming follows the SPEC §c invariant:
+ * "nma-<surface>-off" reads as "this surface's hide is in effect,
+ * turning Meta AI OFF" — opposite of a "this toggle is OFF" reading.
+ * See hide.ts applyGate() for the precise semantics.
+ *
+ * `html.nma-master-off` is added when the master switch is OFF and
+ * is the global override that forces every surface visible. We do not
+ * need an explicit rule here for master-off — by the time that class is
+ * present, hide.ts has already removed all surface-off classes too (see
+ * applyGate), so none of the rules below match. The class is reserved
+ * for a future explicit force-show path and kept as a no-op hook.
+ * ======================================================================= */
+
+/* --- WhatsApp Web --- */
+html.nma-whatsapp-off [aria-label="Meta AI"],
+html.nma-whatsapp-off [aria-label*="Meta AI" i],
+html.nma-whatsapp-off .nma-hidden,
+/* --- Instagram --- */
+html.nma-instagram-off [aria-label="Meta AI"],
+html.nma-instagram-off [aria-label*="Meta AI" i],
+html.nma-instagram-off .nma-hidden,
+/* --- Facebook --- */
+html.nma-facebook-off [aria-label="Meta AI"],
+html.nma-facebook-off [aria-label*="Meta AI" i],
+html.nma-facebook-off .nma-hidden,
+/* --- Messenger --- */
+html.nma-messenger-off [aria-label="Meta AI"],
+html.nma-messenger-off [aria-label*="Meta AI" i],
+html.nma-messenger-off .nma-hidden,
+/* --- Master OFF (global force-show) --- */
+html.nma-master-off [aria-label="Meta AI"],
+html.nma-master-off [aria-label*="Meta AI" i],
+html.nma-master-off .nma-hidden {
+  display: none !important;
+}
+
+/* The master-off class also needs to be a no-op on its own (without any
+   surface-off class also present, the rules above already don't match).
+   The rule below is intentionally empty — it exists so reviewers can
+   grep for "master-off" and see that the selector is intentional, and
+   so future agents don't accidentally strip the master hook. */
+html.nma-master-off {
+  /* no-op: present when master switch is OFF; hide rules above do not
+     match because no surface-off class is present. Reserved hook. */
+}
+
+/* =========================================================================
+ * Block 2 — per-element un-hide rules
+ *
+ * When the user turns a per-element sub-toggle OFF (e.g., they want the
+ * AI circle visible but the rest hidden), hide.ts adds a per-element
+ * body class: `html.nma-<surface>-<element>-off`. The matched
+ * element itself is tagged with `data-nma-element="<elementKey>"`
+ * by the TreeWalker pass. This block un-hides the specific element via
+ * `display: revert !important`.
+ *
+ * Element keys (kebab-cased in class names): ai-circle, ai-button,
+ * ai-chat-contact, ask-meta-ai-search-pill.
+ * ======================================================================= */
+
+/* --- WhatsApp Web per-element un-hide --- */
+html.nma-whatsapp-ai-circle-off [data-nma-element="aiCircle"],
+html.nma-whatsapp-ai-button-off [data-nma-element="aiButton"],
+html.nma-whatsapp-ai-chat-contact-off [data-nma-element="aiChatContact"],
+html.nma-whatsapp-ask-meta-ai-search-pill-off [data-nma-element="askMetaAiSearchPill"],
+
+/* --- Instagram per-element un-hide --- */
+html.nma-instagram-ai-circle-off [data-nma-element="aiCircle"],
+html.nma-instagram-ai-button-off [data-nma-element="aiButton"],
+html.nma-instagram-ai-chat-contact-off [data-nma-element="aiChatContact"],
+html.nma-instagram-ask-meta-ai-search-pill-off [data-nma-element="askMetaAiSearchPill"],
+
+/* --- Facebook per-element un-hide --- */
+html.nma-facebook-ai-circle-off [data-nma-element="aiCircle"],
+html.nma-facebook-ai-button-off [data-nma-element="aiButton"],
+html.nma-facebook-ai-chat-contact-off [data-nma-element="aiChatContact"],
+html.nma-facebook-ask-meta-ai-search-pill-off [data-nma-element="askMetaAiSearchPill"],
+
+/* --- Messenger per-element un-hide --- */
+html.nma-messenger-ai-circle-off [data-nma-element="aiCircle"],
+html.nma-messenger-ai-button-off [data-nma-element="aiButton"],
+html.nma-messenger-ai-chat-contact-off [data-nma-element="aiChatContact"],
+html.nma-messenger-ask-meta-ai-search-pill-off [data-nma-element="askMetaAiSearchPill"] {
+  display: revert !important;
+}

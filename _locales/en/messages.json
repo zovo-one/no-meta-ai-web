@@ -1,0 +1,89 @@
+{
+  "extName": {
+    "message": "No Meta AI (web) hide on WhatsApp, IG, FB, Messenger"
+  },
+  "extDesc": {
+    "message": "Hides the Meta AI button, circle, chat contact, and Ask Meta AI search pill on WhatsApp, Instagram, Facebook, and Messenger web."
+  },
+
+  "masterEyebrow": {
+    "message": "MASTER SWITCH"
+  },
+  "masterSwitchLabel": {
+    "message": "Hide Meta AI everywhere"
+  },
+  "masterSwitchSub": {
+    "message": "WhatsApp, Instagram, Facebook, Messenger on the web"
+  },
+
+  "surfacesEyebrow": {
+    "message": "SURFACES"
+  },
+
+  "surfaceWhatsapp": {
+    "message": "WhatsApp"
+  },
+  "surfaceInstagram": {
+    "message": "Instagram"
+  },
+  "surfaceFacebook": {
+    "message": "Facebook"
+  },
+  "surfaceMessenger": {
+    "message": "Messenger"
+  },
+
+  "elementAiCircle": {
+    "message": "AI circle"
+  },
+  "elementAiButton": {
+    "message": "AI button"
+  },
+  "elementAiChatContact": {
+    "message": "AI chat contact"
+  },
+  "elementAskMetaAiSearch": {
+    "message": "Ask Meta AI search pill"
+  },
+
+  "allOnShortcut": {
+    "message": "All on"
+  },
+  "allOffShortcut": {
+    "message": "All off"
+  },
+
+  "optionsPageTitle": {
+    "message": "Settings to hide Meta AI on the four web surfaces"
+  },
+  "optionsPageLede": {
+    "message": "Pick exactly which Meta AI entry points disappear on WhatsApp, Instagram, Facebook, and Messenger web."
+  },
+
+  "nominativeDisclaimer": {
+    "message": "Not affiliated with Meta. \"Meta\", \"WhatsApp\", \"Instagram\", \"Facebook\", and \"Messenger\" are trademarks of Meta Platforms, Inc."
+  },
+
+  "privacyPitch": {
+    "message": "No tracking. No analytics. No accounts. No cloud. Nothing leaves your device."
+  },
+
+  "onboardingHeroTitle": {
+    "message": "Hide Meta AI on the four web surfaces"
+  },
+  "onboardingHeroSub": {
+    "message": "Six short steps to hide Meta AI on the web."
+  },
+  "onboardingStep1": {
+    "message": "Open WhatsApp Web in a new tab."
+  },
+  "onboardingStep2": {
+    "message": "Watch the Meta AI circle disappear."
+  },
+  "onboardingStep3": {
+    "message": "Toggle WhatsApp, Instagram, Facebook, or Messenger here."
+  },
+  "onboardingCta": {
+    "message": "Open WhatsApp Web"
+  }
+}
